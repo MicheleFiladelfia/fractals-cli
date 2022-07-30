@@ -10,6 +10,8 @@ To-Do things are ordered by priority
 
 - Fix last line unused when mandelbrot-cli is just launched
 
+- Double the available vertical resolution by using ASCII "half-blocks" with fore and background colors
+
 - Add other color palette
 
 - Refactoring

@@ -19,7 +19,7 @@ func initialModel() *model {
 		yStart:        0,
 		xStart:        0,
 		maxIterations: 20,
-		color:         def,
+		color:         DEF,
 		palette:       []string{"#421E0F", "#19071A", "#09012F", "#040449", "#000764", "#0C2C8A", "#1852B1", "#397DD1", "#86B5E5", "#D3ECF8", "#F1E9BF", "#F8C95F", "#FFAA00", "#CC8000", "#995700", "#6A3403"},
 	}
 }

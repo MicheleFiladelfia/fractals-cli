@@ -4,11 +4,11 @@ Multiplatform, Elegant and clean terminal mandelbrot fractal explorer written in
 
 [![forthebadge made-with-go](http://ForTheBadge.com/images/badges/made-with-go.svg)](https://go.dev/)
 
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
+![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)
 
-[![Linux](https://svgshare.com/i/Zhy.svg)](https://svgshare.com/i/Zhy.svg)
-[![macOS](https://svgshare.com/i/ZjP.svg)](https://svgshare.com/i/ZjP.svg)
-[![Windows](https://svgshare.com/i/ZhY.svg)](https://svgshare.com/i/ZhY.svg)
+![Linux](https://svgshare.com/i/Zhy.svg)
+![macOS](https://svgshare.com/i/ZjP.svg)
+![Windows](https://svgshare.com/i/ZhY.svg)
 
 ![mandelbrot-cli](https://user-images.githubusercontent.com/86882607/181925302-a46801f0-bef7-44c9-ac13-95481472127b.png)
 ![mandelbrot-cli](https://user-images.githubusercontent.com/86882607/181925339-26222e9d-737f-404f-a200-c055b1674d72.png)

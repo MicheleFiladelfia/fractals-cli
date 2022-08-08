@@ -17,7 +17,7 @@ func (m *model) View() string {
 	for y := m.yStart; y < m.height+m.yStart; y++ {
 
 		//formula for imaginary part
-		i := (yMin + (yMax-yMin)*((float64(y))/float64(m.height))) / m.zoom
+		i := (YMIN + (YMAX-YMIN)*((float64(y))/float64(m.height))) / m.zoom
 
 		wg.Add(1)
 		pixels = append(pixels, "")
@@ -27,7 +27,7 @@ func (m *model) View() string {
 			for x := m.xStart; x < m.width+m.xStart; x++ {
 
 				//formula for real part
-				r := (xMin + (xMax-xMin)*((float64(x))/float64(m.width))) / m.zoom
+				r := (XMIN + (XMAX-XMIN)*((float64(x))/float64(m.width))) / m.zoom
 
 				z := complex(r, i)
 				iterations := mandelbrot(z, m.maxIterations)

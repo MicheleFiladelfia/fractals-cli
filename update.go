@@ -33,8 +33,6 @@ func (m *model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			if m.maxIterations > 5 {
 				m.maxIterations -= 5
 			}
-		case "enter":
-			m.started = true
 		}
 	case tea.WindowSizeMsg:
 		m.height = msg.Height

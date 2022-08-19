@@ -29,8 +29,8 @@ Multiplatform, Elegant and clean terminal mandelbrot fractal explorer written in
 - **Down:** S
 - **Left:** A
 - **Right:** D
-- **Zoom in:** Q
-- **Zoom out:** E
+- **Zoom in:** I
+- **Zoom out:** O
 - **More Iterations:** +
 - **Less Iterations:** -
 - **Change color palette:** C

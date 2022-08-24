@@ -72,10 +72,9 @@ You can run mandelbrot-cli in most of *nix terminals, but if you want the best p
 - terminator
 - yakuake
 - kitty
-- alacritty (Fastest in rendering and best quality but a little bit glitchy when rendering)
+- alacritty (Fastest in rendering and best quality)
 - xfce4-terminal
-
-Note: mandelbrot-cli is not fully compatible with windows terminals, so is recommended to use a linux distribution.
+- windows terminals
 
 ***
 

@@ -91,4 +91,3 @@ If you want to help me improve this software and have an idea of what can be imp
 ***
 
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-

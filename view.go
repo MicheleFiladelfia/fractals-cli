@@ -54,5 +54,6 @@ func (m *model) View() string {
 		}
 	}
 
+	fmt.Print("\x1b[H")
 	return ""
 }

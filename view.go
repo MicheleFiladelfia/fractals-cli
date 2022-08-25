@@ -25,15 +25,13 @@ func (m *model) View() string {
 		go func(y int) {
 			defer wg.Done()
 			for x := m.xStart; x < m.width+m.xStart; x++ {
-
 				//formula for real part
 				r := (XMIN + (XMAX-XMIN)*((float64(x))/float64(m.width))) / m.zoom
 
-				z := complex(r, i)
-				iterations := mandelbrot(z, m.maxIterations)
+				iterations := mandelbrot(r,i, m.maxIterations)
 
 				if iterations == m.maxIterations {
-					//if current pixel is in the set
+					//if current pixel is the set
 					pixels[y-m.yStart] += ((lipgloss.NewStyle().SetString(" ").Background(lipgloss.Color("#000000"))).String())
 				} else {
 					//else set proper color to current pixel based on the number of iteration
@@ -44,7 +42,7 @@ func (m *model) View() string {
 
 	}
 	wg.Wait()
-
+  
 	for i := 0; i < m.height; i++ {
 		if runtime.GOOS == "windows" || i == 0 {
 			fmt.Print(pixels[i])

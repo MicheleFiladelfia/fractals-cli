@@ -1,7 +1,5 @@
 package main
 
-import "math/cmplx"
-
 const (
 	XMAX = 2.4
 	YMAX = 1.6
@@ -9,14 +7,17 @@ const (
 	YMIN = -1.6
 )
 
-func mandelbrot(c complex128, maxIteration int) int {
-	var z complex128
-	var it int
+func mandelbrot(cr float64, ci float64 , maxIterations int) int {
+  var zr float64
+  var zi float64
+  iterations:=0
+  var temp float64
+  for zr * zr + zi * zi < 4 && iterations < maxIterations {
+    temp = zr * zr - zi * zi + cr
+    zi = 2.0 * zr * zi + ci
+    zr = temp
+    iterations++
+  }
 
-	for cmplx.Abs(z) <= 2 && it < maxIteration {
-		z = z*z + c
-		it++
-	}
-
-	return it
+  return iterations
 }

@@ -28,7 +28,7 @@ func (m *model) View() string {
 				//formula for real part
 				r := (XMIN + (XMAX-XMIN)*((float64(x))/float64(m.width))) / m.zoom
 
-				iterations := mandelbrot(r,i, m.maxIterations)
+				iterations := mandelbrot(r, i, m.maxIterations)
 
 				if iterations == m.maxIterations {
 					//if current pixel is the set
@@ -42,16 +42,16 @@ func (m *model) View() string {
 
 	}
 	wg.Wait()
-  
+
 	for i := 0; i < m.height; i++ {
-		if runtime.GOOS == "windows" || i == 0 {
-			fmt.Print(pixels[i])
-		} else {
+		if runtime.GOOS != "windows" && i != 0 {
 			fmt.Print("\n")
-			fmt.Print(pixels[i])
 		}
+
+		fmt.Print(pixels[i])
 	}
 
 	fmt.Print("\x1b[H")
+
 	return ""
 }

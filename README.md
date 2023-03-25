@@ -42,7 +42,7 @@ Note: The more pixels you display in your terminal, the slower the rendering wil
 
 ***
 
-## Compiling and installing
+## Compiling and running
 
 Firstly you have to [install golang](https://go.dev/doc/install) and then...
 
@@ -52,13 +52,11 @@ git clone https://github.com/MicheleFiladelfia/mandelbrot-cli
 cd mandelbrot-cli
 
 #*nix
-go build -o temp
+go build -o mandelbrot-cli
 #windows
-go build -o temp.exe
+go build -o mandelbrot-cli.exe
 
-go install
-
-mandelbrot-cli
+./mandelbrot-cli
 ```
 
 ***

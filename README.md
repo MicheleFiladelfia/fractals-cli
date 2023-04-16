@@ -82,10 +82,4 @@ In this software is used [The ELM Architecture](https://guide.elm-lang.org/archi
 
 ***
 
-## Contributing
-
-If you want to help me improve this software and have an idea of what can be improved or want to make/add a [TODO](TODO.md), please contact me from my [website](https://michelefiladelfia.github.io/) or on my [telegram](https://t.me/Mic04_7)/discord ( Mic04#5295 ) and describe me your idea, then if i accept, you can do a pr.
-
-***
-
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)

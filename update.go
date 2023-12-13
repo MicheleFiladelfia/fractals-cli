@@ -26,6 +26,8 @@ func (m *model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			m.yStart /= 2
 		case "c", "C":
 			m.nextPalette()
+		case "n", "N":
+			m.nextState()
 		case "+":
 			m.maxIterations += 5
 		case "-":

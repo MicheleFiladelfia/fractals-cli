@@ -1,6 +1,7 @@
 # mandelbrot-cli
 
 Multiplatform, Elegant and clean terminal mandelbrot fractal explorer written in pure golang with concurrency to make the computing of the fractal more efficient.
+> Note: Explore various fractals! Use the "N" key to switch between different fractal sets, expanding beyond the Mandelbrot set. Stay tuned for additional fractals to be added in future updates.
 
 ![mandelbrot-cli](https://user-images.githubusercontent.com/86882607/181925302-a46801f0-bef7-44c9-ac13-95481472127b.png)
 ![mandelbrot-cli](https://user-images.githubusercontent.com/86882607/181925339-26222e9d-737f-404f-a200-c055b1674d72.png)
@@ -26,6 +27,7 @@ Multiplatform, Elegant and clean terminal mandelbrot fractal explorer written in
 - **More Iterations:** +
 - **Less Iterations:** -
 - **Change color palette:** C
+- **Change Fractal Set:** N (Switch between Mandelbrot and Julia sets)
 - **Quit:** ctrl+c
 
 The quality of the mandelbrot set depends on how many pixels you have in your terminal, if you want to display more pixels, on most terminals you can do so with ctrl+- or by scrolling the mouse wheel.

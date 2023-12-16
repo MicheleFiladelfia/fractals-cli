@@ -7,6 +7,7 @@ type State int
 const (
 	MandelbrotSet State = iota
 	JuliaSet
+	BurningShip
 	numStates // represents the total number of states
 )
 

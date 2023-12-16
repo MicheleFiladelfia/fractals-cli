@@ -27,7 +27,7 @@ Multiplatform, Elegant and clean terminal mandelbrot fractal explorer written in
 - **More Iterations:** +
 - **Less Iterations:** -
 - **Change color palette:** C
-- **Change Fractal Set:** N (Switch between Mandelbrot and Julia sets)
+- **Change Fractal Set:** N (Switch between Mandelbrot, Julia, and Burning Ship sets)
 - **Quit:** ctrl+c
 
 The quality of the mandelbrot set depends on how many pixels you have in your terminal, if you want to display more pixels, on most terminals you can do so with ctrl+- or by scrolling the mouse wheel.

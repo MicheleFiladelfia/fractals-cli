@@ -8,7 +8,7 @@ const (
 	MandelbrotSet State = iota
 	JuliaSet
 	BurningShip
-	numStates // represents the total number of states
+	NumStates // represents the total number of states
 )
 
 type model struct {
@@ -40,5 +40,5 @@ func (m *model) Init() tea.Cmd {
 }
 
 func (m *model) nextState() {
-	m.state = (m.state + 1) % numStates
+	m.state = (m.state + 1) % NumStates
 }

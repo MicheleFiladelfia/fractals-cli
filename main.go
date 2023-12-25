@@ -20,6 +20,7 @@ func main() {
 			fmt.Println("Options:")
 			fmt.Println("  --version\t\tPrint version information and exit.")
 			fmt.Println("  --help\t\tPrint this help message and exit.")
+			fmt.Println("  --fractal [<type>]\tSelect the fractal model and display.")
 			fmt.Println()
 			fmt.Println("Controls:")
 			fmt.Println("  W\t\t\tMove up.")

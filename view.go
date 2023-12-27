@@ -38,7 +38,7 @@ func (m *model) View() string {
 				} else if m.state == JuliaSet {
 					// Use a constant value for the Julia set
 					juliaC := complex(-0.7, 0.27015)
-					iterations = juliaSet(r, i, m.maxIterations, juliaC)
+					iterations = julia(r, i, m.maxIterations, juliaC)
 				} else {
 					iterations = burningShip(r, i, m.maxIterations)
 				}

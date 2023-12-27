@@ -1,4 +1,4 @@
-module github.com/MicheleFiladelfia/mandelbrot-cli
+module github.com/MicheleFiladelfia/fractals-cli
 
 go 1.20
 

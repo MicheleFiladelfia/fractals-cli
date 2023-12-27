@@ -12,10 +12,10 @@ func main() {
 	if len(os.Args) > 1 {
 		switch os.Args[1] {
 		case "--version":
-			fmt.Println("mandelbrot-cli (v1.0.0), created by @MicheleFiladelfia")
+			fmt.Println("fractals-cli (v1.0.0), created by @MicheleFiladelfia")
 		case "--help":
-			fmt.Println("mandelbrot-cli: a simple mandelbrot set terminal explorer.")
-			fmt.Println("Usage: mandelbrot-cli [OPTION]")
+			fmt.Println("fractals-cli: a simple fractals terminal explorer.")
+			fmt.Println("Usage: fractals-cli [OPTION]")
 			fmt.Println()
 			fmt.Println("Options:")
 			fmt.Println("  --version\t\tPrint version information and exit.")
@@ -40,7 +40,7 @@ func main() {
 			if len(os.Args) > 2 {
 				choice, err := strconv.Atoi(os.Args[2])
 				if err != nil {
-					fmt.Println("mandelbrot-cli: invalid fractal set option")
+					fmt.Println("fractals-cli: invalid fractal set option")
 					fmt.Println("Please make sure the provided option is a valid integer.")
 					fmt.Println("Try '--fractal' for more information.")
 					os.Exit(1)
@@ -55,14 +55,14 @@ func main() {
 						1: "Julia Set",
 						2: "Burning Ship",
 					}
-					fmt.Printf("mandelbrot-cli: unrecognized fractal set option '%d'\n", choice)
+					fmt.Printf("fractals-cli: unrecognized fractal set option '%d'\n", choice)
 					fmt.Println("Valid options are:")
 					for key, name := range fractals {
 						fmt.Printf("  %d\t%s\n", key, name)
 					}
 				}
 			} else {
-				fmt.Println("Usage: mandelbrot-cli --fractal [OPTION]")
+				fmt.Println("Usage: fractals-cli --fractal [OPTION]")
 				fmt.Println()
 				fmt.Println("Current fractal set options:")
 				fmt.Println(" 0\t\tMandelbrot Set (the default option)")
@@ -72,7 +72,7 @@ func main() {
 				fmt.Println("Report bugs to <https://github.com/MicheleFiladelfia>")
 			}
 		default:
-			fmt.Println("mandelbrot-cli: unrecognized option '", os.Args[1], "'")
+			fmt.Println("fractals-cli: unrecognized option '", os.Args[1], "'")
 			fmt.Println("Try '--help' for more information.")
 		}
 

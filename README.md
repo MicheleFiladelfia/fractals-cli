@@ -2,12 +2,11 @@
 
 Multiplatform, Elegant and clean terminal fractals explorer written in pure golang with concurrency to make the computing of the fractal more efficient.
 
-![fractals-cli](https://user-images.githubusercontent.com/86882607/181925302-a46801f0-bef7-44c9-ac13-95481472127b.png)
-![fractals-cli](https://user-images.githubusercontent.com/86882607/181925339-26222e9d-737f-404f-a200-c055b1674d72.png)
-![fractals-cli](https://user-images.githubusercontent.com/86882607/181925342-0fa345ff-29d5-46fe-bfa6-f4bdf10b578f.png)
+![fractals-cli](https://github.com/MicheleFiladelfia/fractals-cli/assets/86882607/85cac069-fb07-4605-9270-1638a29c9568)
+![fractals-cli](https://github.com/MicheleFiladelfia/fractals-cli/assets/86882607/ec2d9b36-9006-4ac7-a236-1a03579eed88)
+![fractals-cli](https://github.com/MicheleFiladelfia/fractals-cli/assets/86882607/83bb9686-6d1b-4a6f-b386-a61d4af42f1c)
+![fractals-cli](https://github.com/MicheleFiladelfia/fractals-cli/assets/86882607/d8050f5d-7a9e-48ce-afcd-b3136a4b483b)
 ![fractals-cli](https://user-images.githubusercontent.com/86882607/181925350-7f31e072-861e-4552-bf4e-b42de4dc8082.png)
-![fractals-cli](https://user-images.githubusercontent.com/86882607/181925358-047d9ecf-7db2-44d5-97dd-277c3ca802f0.png)
-![fractals-cli](https://user-images.githubusercontent.com/86882607/181925376-ab1aa80b-6594-4e69-a64e-5f757dea2a5d.png)
 ![fractals-cli](https://user-images.githubusercontent.com/86882607/181925437-d523ac86-a52c-4b68-a5a2-1f124f10daa4.png)
 ![fractals-cli](https://user-images.githubusercontent.com/86882607/181925452-11120aaf-cdcb-4ee6-a1af-18b1dea4e9ba.png)
 ![fractals-cli](https://user-images.githubusercontent.com/86882607/181925489-056a74bb-d036-4770-9798-8148b86f3d05.png)

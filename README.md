@@ -24,6 +24,8 @@ Multiplatform, Elegant and clean terminal fractals explorer written in pure gola
 - **Zoom out:** O
 - **More Iterations:** +
 - **Less Iterations:** -
+- **Increase Bailout:** B
+- **Decrease Bailout:** V
 - **Change color palette:** C
 - **Change Fractal Set:** N (Switch between Mandelbrot, Julia, and Burning Ship sets)
 - **Quit:** ctrl+c

@@ -34,13 +34,13 @@ func (m *model) View() string {
 				var iterations int
 
 				if m.state == MandelbrotSet {
-					iterations = mandelbrot(r, i, m.maxIterations)
+					iterations = mandelbrot(r, i, m.maxIterations, m.bailout)
 				} else if m.state == JuliaSet {
 					// Use a constant value for the Julia set
 					juliaC := complex(-0.7, 0.27015)
-					iterations = julia(r, i, m.maxIterations, juliaC)
+					iterations = julia(r, i, m.maxIterations, m.bailout, juliaC)
 				} else {
-					iterations = burningShip(r, i, m.maxIterations)
+					iterations = burningShip(r, i, m.maxIterations, m.bailout)
 				}
 
 				if iterations == m.maxIterations {

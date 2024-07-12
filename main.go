@@ -33,6 +33,8 @@ func main() {
 			fmt.Println("  -\t\t\tDecrease iterations.")
 			fmt.Println("  C\t\t\tChange color palette.")
 			fmt.Println("  N\t\t\tChange fractal set.")
+			fmt.Println("  B\t\t\tIncrease bailout by 0.1.")
+			fmt.Println("  V\t\t\tDecrease bailout by 0.1.")
 			fmt.Println("  ctrl+c\t\tQuit.")
 			fmt.Println()
 			fmt.Println("Report bugs to <https://github.com/MicheleFiladelfia>")

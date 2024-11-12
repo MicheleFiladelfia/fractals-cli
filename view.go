@@ -8,6 +8,13 @@ import (
 	"github.com/charmbracelet/lipgloss"
 )
 
+const (
+	XMAX = 2.4
+	YMAX = 1.6
+	XMIN = -2.4
+	YMIN = -1.6
+)
+
 func (m *model) View() string {
 	pixels := make([]string, 0)
 
@@ -31,18 +38,9 @@ func (m *model) View() string {
 			for x := m.xStart; x < m.width+m.xStart; x++ {
 				//formula for real part
 				r := (XMIN + (XMAX-XMIN)*((float64(x))/float64(m.width))) / m.zoom
-				var iterations int
 
-				if m.state == MandelbrotSet {
-					iterations = mandelbrot(r, i, m.maxIterations, m.bailout)
-				} else if m.state == JuliaSet {
-					// Use a constant value for the Julia set
-					juliaC := complex(-0.7, 0.27015)
-					iterations = julia(r, i, m.maxIterations, m.bailout, juliaC)
-				} else {
-					iterations = burningShip(r, i, m.maxIterations, m.bailout)
-				}
-
+				iterations := m.fractal_function(r, i, m.maxIterations, m.bailout)
+				
 				if iterations == m.maxIterations {
 					//if current pixel is the set
 					pixels[y-m.yStart] += ((lipgloss.NewStyle().SetString(" ").Background(lipgloss.Color("#000000"))).String())

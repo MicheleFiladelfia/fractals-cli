@@ -1,6 +1,6 @@
 # fractals-cli
 
-Multiplatform, Elegant and clean terminal fractals explorer written in pure golang with concurrency to make the computing of the fractal more efficient.
+Multiplatform, Elegant and clean terminal fractals explorer written in pure golang with concurrency and dynamic programming to make the computing of the fractal more efficient.
 
 ![fractals-cli](https://github.com/MicheleFiladelfia/fractals-cli/assets/86882607/85cac069-fb07-4605-9270-1638a29c9568)
 ![fractals-cli](https://github.com/MicheleFiladelfia/fractals-cli/assets/86882607/ec2d9b36-9006-4ac7-a236-1a03579eed88)
@@ -30,6 +30,13 @@ Multiplatform, Elegant and clean terminal fractals explorer written in pure gola
 - **Change Fractal Set:** N (Switch between Mandelbrot, Julia, and Burning Ship sets)
 - **Quit:** ctrl+c
 
+## Command line flags
+- **--help** small guide on how to use fractal-cli
+- **--version** get version number
+- **--usecache** uses dynamic programming optimizations (faster but probably unstable)
+
+
+## Render quality of the fractal
 The quality of the fractal depends on how many pixels you have in your terminal, if you want to display more pixels, on most terminals you can do so with ctrl+- or by scrolling the mouse wheel.
 
 Note: The more pixels you display in your terminal, the slower the rendering will be
@@ -64,7 +71,7 @@ You can run fractals-cli in most of *nix terminals, but if you want the best pos
 - terminator
 - yakuake
 - kitty
-- alacritty (Fastest in rendering and best quality)
+- alacritty (Fastest in rendering and more pixels)
 - xfce4-terminal
 - windows terminals
 

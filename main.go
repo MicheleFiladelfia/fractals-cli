@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"os"
-	"strconv"
 
 	tea "github.com/charmbracelet/bubbletea"
 )
@@ -12,7 +11,7 @@ func main() {
 	if len(os.Args) > 1 {
 		switch os.Args[1] {
 		case "--version":
-			fmt.Println("fractals-cli (v1.0.0), created by @MicheleFiladelfia")
+			fmt.Println("fractals-cli (v1.1.0), created by @MicheleFiladelfia")
 		case "--help":
 			fmt.Println("fractals-cli: a simple fractals terminal explorer.")
 			fmt.Println("Usage: fractals-cli [OPTION]")
@@ -20,7 +19,7 @@ func main() {
 			fmt.Println("Options:")
 			fmt.Println("  --version\t\tPrint version information and exit.")
 			fmt.Println("  --help\t\tPrint this help message and exit.")
-			fmt.Println("  --fractal [<type>]\tSelect the fractal model and display.")
+			fmt.Println("  --usecache\t\tRuns fractal-cli with dynamic programming optimization (a little bit faster but may be unstable)")
 			fmt.Println()
 			fmt.Println("Controls:")
 			fmt.Println("  W\t\t\tMove up.")
@@ -38,41 +37,10 @@ func main() {
 			fmt.Println("  ctrl+c\t\tQuit.")
 			fmt.Println()
 			fmt.Println("Report bugs to <https://github.com/MicheleFiladelfia>")
-		case "--fractal":
-			if len(os.Args) > 2 {
-				choice, err := strconv.Atoi(os.Args[2])
-				if err != nil {
-					fmt.Println("fractals-cli: invalid fractal set option")
-					fmt.Println("Please make sure the provided option is a valid integer.")
-					fmt.Println("Try '--fractal' for more information.")
-					os.Exit(1)
-				}
-				if State(choice) < NumStates {
-					m := initialModel()
-					m.state = State(choice)
-					startWithModel(m)
-				} else {
-					var fractals = map[int]string{
-						0: "Mandelbrot Set",
-						1: "Julia Set",
-						2: "Burning Ship",
-					}
-					fmt.Printf("fractals-cli: unrecognized fractal set option '%d'\n", choice)
-					fmt.Println("Valid options are:")
-					for key, name := range fractals {
-						fmt.Printf("  %d\t%s\n", key, name)
-					}
-				}
-			} else {
-				fmt.Println("Usage: fractals-cli --fractal [OPTION]")
-				fmt.Println()
-				fmt.Println("Current fractal set options:")
-				fmt.Println(" 0\t\tMandelbrot Set (the default option)")
-				fmt.Println(" 1\t\tJulia Set")
-				fmt.Println(" 2\t\tBurning Ship")
-				fmt.Println()
-				fmt.Println("Report bugs to <https://github.com/MicheleFiladelfia>")
-			}
+		case "--usecache":
+			var mod = initialModel()
+			mod.usecache = true
+			startWithModel(mod)
 		default:
 			fmt.Println("fractals-cli: unrecognized option '", os.Args[1], "'")
 			fmt.Println("Try '--help' for more information.")

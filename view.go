@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"runtime"
 	"sync"
+	"bufio"
+	"os"
 
 	"github.com/charmbracelet/lipgloss"
 )
@@ -17,6 +19,9 @@ const (
 
 func (m *model) View() string {
 	pixels := make([]string, 0)
+
+	buf := bufio.NewWriter(os.Stdout)
+	defer buf.Flush()
 
 	var mu sync.Mutex
 	var wg sync.WaitGroup
@@ -38,9 +43,25 @@ func (m *model) View() string {
 			for x := m.xStart; x < m.width+m.xStart; x++ {
 				//formula for real part
 				r := (XMIN + (XMAX-XMIN)*((float64(x))/float64(m.width))) / m.zoom
-
-				iterations := m.fractal_function(r, i, m.maxIterations, m.bailout)
 				
+				hash := hashParameters(r,i,m.maxIterations,m.bailout)
+				var iterations int
+
+				if m.usecache {
+					itscached, found := m.cache[hash]
+
+					if found == false {
+						iterations = m.fractalFunction(r, i, m.maxIterations, m.bailout)
+						m.cache[hash] = iterations
+					} else {
+						iterations = itscached
+					}
+				} else {
+					iterations = m.fractalFunction(r, i, m.maxIterations, m.bailout)
+				}
+
+			
+
 				if iterations == m.maxIterations {
 					//if current pixel is the set
 					pixels[y-m.yStart] += ((lipgloss.NewStyle().SetString(" ").Background(lipgloss.Color("#000000"))).String())
@@ -56,13 +77,13 @@ func (m *model) View() string {
 
 	for i := 0; i < m.height; i++ {
 		if runtime.GOOS != "windows" && i != 0 {
-			fmt.Print("\n")
+			fmt.Fprint(buf,"\n")
 		}
 
-		fmt.Print(pixels[i])
+		fmt.Fprint(buf,pixels[i])
 	}
 
-	fmt.Print("\x1b[H")
+	fmt.Fprint(buf,"\x1b[H")
 
 	return ""
 }

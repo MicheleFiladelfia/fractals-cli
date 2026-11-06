@@ -64,9 +64,9 @@ go build -o fractals-cli.exe
 
 ***
 
-## The best terminals where to run fractals-cli
+## Recommended Terminals
 
-You can run fractals-cli in most of *nix terminals, but if you want the best possible experience, you have to run it in one how the tested terminals below:
+You can run `fractals-cli` in most *nix and Windows terminals. However, for the best visual experience and performance, we recommend using one of the tested terminals below:
 
 - gnome-terminal
 - konsole

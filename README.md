@@ -33,7 +33,7 @@ Multiplatform, Elegant and clean terminal fractals explorer written in pure gola
 ## Command line flags
 - **--help** small guide on how to use fractal-cli
 - **--version** get version number
-- **--usecache** uses dynamic programming optimizations (faster but probably unstable)
+- **--nocache** disable memoization cache optimization (enabled by default)
 
 
 ## Render quality of the fractal

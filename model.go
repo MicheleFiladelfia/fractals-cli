@@ -1,6 +1,10 @@
 package main
 
-import tea "github.com/charmbracelet/bubbletea"
+import (
+	"sync"
+
+	tea "github.com/charmbracelet/bubbletea"
+)
 
 type State int
 
@@ -12,33 +16,39 @@ const (
 )
 
 type model struct {
-	height        int
-	width         int
-	zoom          float64
-	yStart        int
-	xStart        int
-	maxIterations int
-	color         int
-	state         State
+	height          int
+	width           int
+	zoom            float64
+	yStart          int
+	xStart          int
+	maxIterations   int
+	color           int
+	state           State
 	fractalFunction func(cr float64, ci float64, maxIterations int, bailout float64) int
-	palette       []string
-	bailout       float64
-	usecache	  bool
-	cache		  map[uint64]int
+	palette         []string
+	renderedPalette []string
+	setPixel        string
+	bailout         float64
+	usecache        bool
+	cache           map[uint64]int
+	cacheMu         sync.RWMutex
 }
 
 func initialModel() *model {
-	return &model{
-		zoom:          1.0,
-		yStart:        0,
-		xStart:        0,
-		maxIterations: 20,
-		color:         DEF,
-		state:         MandelbrotSet,
+	m := &model{
+		zoom:            1.0,
+		yStart:          0,
+		xStart:          0,
+		maxIterations:   20,
+		color:           DEF,
+		state:           MandelbrotSet,
 		fractalFunction: mandelbrot,
-		palette:       []string{"#421E0F", "#19071A", "#09012F", "#040449", "#000764", "#0C2C8A", "#1852B1", "#397DD1", "#86B5E5", "#D3ECF8", "#F1E9BF", "#F8C95F", "#FFAA00", "#CC8000", "#995700", "#6A3403"},
-		bailout:       4.0,
+		palette:         []string{"#421E0F", "#19071A", "#09012F", "#040449", "#000764", "#0C2C8A", "#1852B1", "#397DD1", "#86B5E5", "#D3ECF8", "#F1E9BF", "#F8C95F", "#FFAA00", "#CC8000", "#995700", "#6A3403"},
+		bailout:         4.0,
+		cache:           make(map[uint64]int),
 	}
+	m.buildPaletteStyles()
+	return m
 }
 
 func (m *model) Init() tea.Cmd {
@@ -59,5 +69,7 @@ func (m *model) nextState() {
 }
 
 func (m *model) resetCache() {
+	m.cacheMu.Lock()
+	defer m.cacheMu.Unlock()
 	m.cache = make(map[uint64]int)
 }

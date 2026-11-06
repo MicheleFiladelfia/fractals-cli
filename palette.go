@@ -1,5 +1,7 @@
 package main
 
+import "github.com/charmbracelet/lipgloss"
+
 // colors enum
 const (
 	DEF = iota
@@ -10,6 +12,14 @@ const (
 	BLUE
 	RAINBOW
 )
+
+func (m *model) buildPaletteStyles() {
+	m.setPixel = lipgloss.NewStyle().SetString(" ").Background(lipgloss.Color("#000000")).String()
+	m.renderedPalette = make([]string, len(m.palette))
+	for i, c := range m.palette {
+		m.renderedPalette[i] = lipgloss.NewStyle().SetString(" ").Background(lipgloss.Color(c)).String()
+	}
+}
 
 func (m *model) nextPalette() {
 	m.color++
@@ -31,5 +41,8 @@ func (m *model) nextPalette() {
 	default:
 		m.color = -1
 		m.nextPalette()
+		return
 	}
+	m.buildPaletteStyles()
 }
+

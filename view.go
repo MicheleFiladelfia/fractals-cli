@@ -1,13 +1,8 @@
 package main
 
 import (
-	"fmt"
-	"runtime"
+	"strings"
 	"sync"
-	"bufio"
-	"os"
-
-	"github.com/charmbracelet/lipgloss"
 )
 
 const (
@@ -17,73 +12,87 @@ const (
 	YMIN = -1.6
 )
 
+type cacheEntry struct {
+	hash       uint64
+	iterations int
+}
+
 func (m *model) View() string {
-	pixels := make([]string, 0)
+	if m.height <= 0 || m.width <= 0 {
+		return ""
+	}
 
-	buf := bufio.NewWriter(os.Stdout)
-	defer buf.Flush()
+	pixels := make([]string, m.height)
+	var rowMisses [][]cacheEntry
+	if m.usecache {
+		rowMisses = make([][]cacheEntry, m.height)
+	}
 
-	var mu sync.Mutex
 	var wg sync.WaitGroup
+	wg.Add(m.height)
 
-	//generating fractal colored "image" by using concurrency
+	paletteLen := len(m.renderedPalette)
+
+	m.cacheMu.RLock()
+	// Generating fractal colored "image" by using concurrency (one goroutine per row)
 	for y := m.yStart; y < m.height+m.yStart; y++ {
+		// Formula for imaginary part
+		i := (YMIN + (YMAX-YMIN)*(float64(y)/float64(m.height))) / m.zoom
+		rowIdx := y - m.yStart
 
-		//formula for imaginary part
-		i := (YMIN + (YMAX-YMIN)*((float64(y))/float64(m.height))) / m.zoom
-
-		wg.Add(1)
-		pixels = append(pixels, "")
-
-		go func(y int) {
+		go func(rowIdx int, i float64) {
 			defer wg.Done()
-			mu.Lock()
-			defer mu.Unlock()
+
+			var row strings.Builder
+			row.Grow(m.width * 20)
+
+			var misses []cacheEntry
 
 			for x := m.xStart; x < m.width+m.xStart; x++ {
-				//formula for real part
-				r := (XMIN + (XMAX-XMIN)*((float64(x))/float64(m.width))) / m.zoom
-				
-				hash := hashParameters(r,i,m.maxIterations,m.bailout)
+				// Formula for real part
+				r := (XMIN + (XMAX-XMIN)*(float64(x)/float64(m.width))) / m.zoom
+
 				var iterations int
-
 				if m.usecache {
-					itscached, found := m.cache[hash]
-
-					if found == false {
-						iterations = m.fractalFunction(r, i, m.maxIterations, m.bailout)
-						m.cache[hash] = iterations
-					} else {
+					hash := hashParameters(r, i, m.maxIterations, m.bailout)
+					if itscached, found := m.cache[hash]; found {
 						iterations = itscached
+					} else {
+						iterations = m.fractalFunction(r, i, m.maxIterations, m.bailout)
+						misses = append(misses, cacheEntry{hash: hash, iterations: iterations})
 					}
 				} else {
 					iterations = m.fractalFunction(r, i, m.maxIterations, m.bailout)
 				}
 
-			
-
 				if iterations == m.maxIterations {
-					//if current pixel is the set
-					pixels[y-m.yStart] += ((lipgloss.NewStyle().SetString(" ").Background(lipgloss.Color("#000000"))).String())
+					row.WriteString(m.setPixel)
 				} else {
-					//else set proper color to current pixel based on the number of iteration
-					pixels[y-m.yStart] += (lipgloss.NewStyle().SetString(" ").Background(lipgloss.Color(m.palette[iterations%len(m.palette)]))).String()
+					row.WriteString(m.renderedPalette[iterations%paletteLen])
 				}
 			}
-		}(y)
 
+			if len(misses) > 0 {
+				rowMisses[rowIdx] = misses
+			}
+
+			pixels[rowIdx] = row.String()
+		}(rowIdx, i)
 	}
+
 	wg.Wait()
+	m.cacheMu.RUnlock()
 
-	for i := 0; i < m.height; i++ {
-		if runtime.GOOS != "windows" && i != 0 {
-			fmt.Fprint(buf,"\n")
+	if m.usecache {
+		m.cacheMu.Lock()
+		for _, misses := range rowMisses {
+			for _, entry := range misses {
+				m.cache[entry.hash] = entry.iterations
+			}
 		}
-
-		fmt.Fprint(buf,pixels[i])
+		m.cacheMu.Unlock()
 	}
 
-	fmt.Fprint(buf,"\x1b[H")
-
-	return ""
+	return strings.Join(pixels, "\n")
 }
+

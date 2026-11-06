@@ -9,11 +9,11 @@ func (m *model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case "ctrl+c":
 			return m, tea.Quit
 		case "w", "W":
-			m.yStart -= m.height / 20
+			m.yStart -= (m.height * 2) / 20
 		case "a", "A":
 			m.xStart -= m.width / 20
 		case "s", "S":
-			m.yStart += m.height / 20
+			m.yStart += (m.height * 2) / 20
 		case "d", "D":
 			m.xStart += m.width / 20
 		case "i", "I":

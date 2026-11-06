@@ -13,12 +13,41 @@ const (
 	RAINBOW
 )
 
+// buildPaletteStyles precomputes [topColor][bottomColor] styles using '▀' (half-block).
+// Each terminal character displays 2 vertical pixels, doubling resolution.
 func (m *model) buildPaletteStyles() {
-	m.setPixel = lipgloss.NewStyle().SetString(" ").Background(lipgloss.Color("#000000")).String()
-	m.renderedPalette = make([]string, len(m.palette))
-	for i, c := range m.palette {
-		m.renderedPalette[i] = lipgloss.NewStyle().SetString(" ").Background(lipgloss.Color(c)).String()
+	allColors := append([]string{}, m.palette...)
+	allColors = append(allColors, "#000000") // last color: set interior (black)
+	total := len(allColors)
+
+	m.pairStyles = make([][]string, total)
+	for top := 0; top < total; top++ {
+		m.pairStyles[top] = make([]string, total)
+		topColor := lipgloss.Color(allColors[top])
+		for bot := 0; bot < total; bot++ {
+			if top == bot {
+				// Same color on top and bottom: a simple space is enough
+				m.pairStyles[top][bot] = lipgloss.NewStyle().
+					SetString(" ").
+					Background(topColor).
+					String()
+			} else {
+				// Top pixel is foreground, bottom pixel is background
+				m.pairStyles[top][bot] = lipgloss.NewStyle().
+					SetString("▀").
+					Foreground(topColor).
+					Background(lipgloss.Color(allColors[bot])).
+					String()
+			}
+		}
 	}
+}
+
+func (m *model) colorIndex(iterations int) int {
+	if iterations == m.maxIterations {
+		return len(m.palette) // indice del set "#000000"
+	}
+	return iterations % len(m.palette)
 }
 
 func (m *model) nextPalette() {

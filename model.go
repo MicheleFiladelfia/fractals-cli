@@ -26,8 +26,7 @@ type model struct {
 	state           State
 	fractalFunction func(cr float64, ci float64, maxIterations int, bailout float64) int
 	palette         []string
-	renderedPalette []string
-	setPixel        string
+	pairStyles      [][]string
 	bailout         float64
 	usecache        bool
 	cache           map[uint64]int

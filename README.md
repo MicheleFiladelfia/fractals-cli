@@ -3,7 +3,7 @@
 Multiplatform, Elegant and clean terminal fractals explorer written in pure golang with concurrency and dynamic programming to make the computing of the fractal more efficient.
 
 ![fractals-cli](https://github.com/MicheleFiladelfia/fractals-cli/assets/86882607/85cac069-fb07-4605-9270-1638a29c9568)
-![fractals-cli](https://github.com/MicheleFiladelfia/fractals-cli/assets/86882607/ec2d9b36-9006-4ac7-a236-1a03579eed88)
+![fractals-cli](https://github.com/user-attachments/assets/633018d5-26db-42e5-b07d-378d56e33eb2)
 ![fractals-cli](https://github.com/MicheleFiladelfia/fractals-cli/assets/86882607/83bb9686-6d1b-4a6f-b386-a61d4af42f1c)
 ![fractals-cli](https://github.com/MicheleFiladelfia/fractals-cli/assets/86882607/d8050f5d-7a9e-48ce-afcd-b3136a4b483b)
 ![fractals-cli](https://user-images.githubusercontent.com/86882607/181925350-7f31e072-861e-4552-bf4e-b42de4dc8082.png)

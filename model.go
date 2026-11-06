@@ -87,6 +87,16 @@ func (m *model) paletteName() string {
 		return "Blue"
 	case RAINBOW:
 		return "Rainbow"
+	case CYBERPUNK:
+		return "Cyberpunk"
+	case EMERALD:
+		return "Emerald"
+	case SUNSET:
+		return "Sunset"
+	case ELECTRIC_BLUE:
+		return "Electric Blue"
+	case NEON_ACID:
+		return "Neon Acid"
 	default:
 		return "Custom"
 	}

@@ -11,6 +11,11 @@ const (
 	FIRE
 	BLUE
 	RAINBOW
+	CYBERPUNK
+	EMERALD
+	SUNSET
+	ELECTRIC_BLUE
+	NEON_ACID
 )
 
 // buildPaletteStyles precomputes [topColor][bottomColor] styles using '▀' (half-block).
@@ -67,6 +72,16 @@ func (m *model) nextPalette() {
 		m.palette = []string{"#328ca9", "#0e6ea9", "#2c4ea3", "#193882", "#102446"}
 	case RAINBOW:
 		m.palette = []string{"#ff0000", "#ff4103", "#ff6703", "#ffab03", "#ffc903", "#ffe703", "#eaff03", "#ccff03", "#adff03", "#71ff03", "#03ff95", "#03ffc2", "#03fff6", "#03d3ff", "#03b5ff", "#0380ff", "#0344ff", "#5803ff", "#8603ff", "#ba03ff", "#f603ff", "#ff03cb", "#ff0379"}
+	case CYBERPUNK:
+		m.palette = []string{"#05051a", "#1b0a2a", "#3b1443", "#6f1a66", "#a61b7f", "#db248a", "#ff3399", "#ff66b2", "#ff99cc", "#00ffff", "#00d4ff", "#0099ff", "#0055ff", "#2b0080"}
+	case EMERALD:
+		m.palette = []string{"#021c14", "#043828", "#08583e", "#0e7d59", "#15a676", "#20d096", "#44e5ad", "#7bf0ca", "#b9fae4", "#f7fff9", "#d4af37", "#a67c1e", "#5c4308"}
+	case SUNSET:
+		m.palette = []string{"#0b0416", "#240b36", "#48104e", "#72145e", "#9f1b63", "#c82b5a", "#eb4648", "#f86941", "#fc9249", "#fdbb5d", "#fee180", "#fff7b2"}
+	case ELECTRIC_BLUE:
+		m.palette = []string{"#030b1e", "#071c3d", "#0d3566", "#145291", "#1c74bf", "#269bf0", "#51b8ff", "#85d3ff", "#bdeaff", "#f0f9ff", "#72b0ea", "#3b6fa0", "#183b60"}
+	case NEON_ACID:
+		m.palette = []string{"#08020f", "#200330", "#45065c", "#7b0985", "#b81299", "#ee2b8a", "#ff5964", "#ff933b", "#ffcf24", "#e8ff38", "#8eff38", "#38ff74", "#1ffff0"}
 	default:
 		m.color = -1
 		m.nextPalette()

@@ -32,7 +32,7 @@ Multiplatform, Elegant and clean terminal fractals explorer written in pure gola
 - **Toggle coordinates bar:** X
 - **Toggle controls help:** ? or H
 - **Change color palette:** C
-- **Change Fractal Set:** N (Switch between Mandelbrot, Julia, and Burning Ship sets)
+- **Change Fractal Set:** N (Switch between 13 fractal sets: Mandelbrot, Julia, Burning Ship, Tricorn, Celtic, Buffalo, Multibrot 3/4, Newton, Perpendicular Ship, Celtic Ship, Lambda, and Shark Fin)
 - **Quit:** ctrl+c
 
 ## Command line flags

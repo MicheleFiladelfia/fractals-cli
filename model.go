@@ -12,6 +12,16 @@ const (
 	MandelbrotSet State = iota
 	JuliaSet
 	BurningShipSet
+	TricornSet
+	CelticSet
+	BuffaloSet
+	Multibrot3Set
+	NewtonSet
+	PerpBurningShipSet
+	CelticBurningShipSet
+	Multibrot4Set
+	LambdaSet
+	SharkFinSet
 	NumStates // represents the total number of states
 )
 
@@ -66,6 +76,26 @@ func (m *model) stateName() string {
 		return "Julia"
 	case BurningShipSet:
 		return "Burning Ship"
+	case TricornSet:
+		return "Tricorn"
+	case CelticSet:
+		return "Celtic"
+	case BuffaloSet:
+		return "Buffalo"
+	case Multibrot3Set:
+		return "Multibrot (z^3)"
+	case NewtonSet:
+		return "Newton (z^3-1)"
+	case PerpBurningShipSet:
+		return "Perpendicular Burning Ship"
+	case CelticBurningShipSet:
+		return "Celtic Burning Ship"
+	case Multibrot4Set:
+		return "Multibrot (z^4)"
+	case LambdaSet:
+		return "Lambda"
+	case SharkFinSet:
+		return "Shark Fin"
 	default:
 		return "Unknown"
 	}
@@ -111,6 +141,26 @@ func (m *model) nextState() {
 		m.fractalFunction = julia
 	case BurningShipSet:
 		m.fractalFunction = burningShip
+	case TricornSet:
+		m.fractalFunction = tricorn
+	case CelticSet:
+		m.fractalFunction = celticMandelbrot
+	case BuffaloSet:
+		m.fractalFunction = buffalo
+	case Multibrot3Set:
+		m.fractalFunction = multibrot3
+	case NewtonSet:
+		m.fractalFunction = newton
+	case PerpBurningShipSet:
+		m.fractalFunction = perpendicularBurningShip
+	case CelticBurningShipSet:
+		m.fractalFunction = celticBurningShip
+	case Multibrot4Set:
+		m.fractalFunction = multibrot4
+	case LambdaSet:
+		m.fractalFunction = lambda
+	case SharkFinSet:
+		m.fractalFunction = sharkFin
 	}
 }
 

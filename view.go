@@ -49,10 +49,10 @@ func (m *model) View() string {
 	m.cacheMu.RLock()
 	// Generating fractal colored image with double vertical resolution (upper half-block '▀')
 	for rowIdx := 0; rowIdx < m.height; rowIdx++ {
-		yTop := m.yStart + rowIdx*2
+		yTop := rowIdx * 2
 		yBot := yTop + 1
-		iTop := (YMIN + (YMAX-YMIN)*(float64(yTop)/float64(subHeight))) / m.zoom
-		iBot := (YMIN + (YMAX-YMIN)*(float64(yBot)/float64(subHeight))) / m.zoom
+		iTop := m.centerY + ((float64(yTop)-float64(subHeight)/2.0)/(m.zoom*float64(subHeight)))*(YMAX-YMIN)
+		iBot := m.centerY + ((float64(yBot)-float64(subHeight)/2.0)/(m.zoom*float64(subHeight)))*(YMAX-YMIN)
 
 		go func(rowIdx int, iTop, iBot float64) {
 			defer wg.Done()
@@ -62,8 +62,8 @@ func (m *model) View() string {
 
 			var misses []cacheEntry
 
-			for x := m.xStart; x < m.width+m.xStart; x++ {
-				r := (XMIN + (XMAX-XMIN)*(float64(x)/float64(m.width))) / m.zoom
+			for px := 0; px < m.width; px++ {
+				r := m.centerX + ((float64(px)-float64(m.width)/2.0)/(m.zoom*float64(m.width)))*(XMAX-XMIN)
 
 				iterTop := m.computePoint(r, iTop, &misses)
 				iterBot := m.computePoint(r, iBot, &misses)

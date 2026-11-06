@@ -19,8 +19,8 @@ type model struct {
 	height          int
 	width           int
 	zoom            float64
-	yStart          int
-	xStart          int
+	centerX         float64
+	centerY         float64
 	maxIterations   int
 	color           int
 	state           State
@@ -36,8 +36,8 @@ type model struct {
 func initialModel() *model {
 	m := &model{
 		zoom:            1.0,
-		yStart:          0,
-		xStart:          0,
+		centerX:         0.0,
+		centerY:         0.0,
 		maxIterations:   20,
 		color:           DEF,
 		state:           MandelbrotSet,

@@ -66,14 +66,15 @@ go build -o fractals-cli.exe
 
 ## Recommended Terminals
 
-You can run `fractals-cli` in most *nix and Windows terminals. However, for the best visual experience and performance, we recommend using one of the tested terminals below:
+You can run `fractals-cli` in most Unix and Windows terminals. However, for the best visual experience and performance, we recommend using one of the tested terminals below:
 
+- ghostty (Fastest native macOS/Linux GPU-accelerated terminal)
+- alacritty (Fastest in rendering and more pixels)
+- kitty
 - gnome-terminal
 - konsole
 - terminator
 - yakuake
-- kitty
-- alacritty (Fastest in rendering and more pixels)
 - xfce4-terminal
 - windows terminals
 

@@ -1,6 +1,6 @@
 # fractals-cli
 
-Multiplatform, Elegant and clean terminal fractals explorer written in pure golang with concurrency and dynamic programming to make the computing of the fractal more efficient.
+A multiplatform, high-performance terminal fractals explorer written in pure Go, powered by concurrent rendering and memoization for smooth real-time exploration.
 
 <p align="center">
   <img src="https://github.com/MicheleFiladelfia/fractals-cli/assets/86882607/85cac069-fb07-4605-9270-1638a29c9568" width="48%" />

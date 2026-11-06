@@ -7,7 +7,7 @@ Multiplatform, Elegant and clean terminal fractals explorer written in pure gola
   <img src="https://github.com/user-attachments/assets/633018d5-26db-42e5-b07d-378d56e33eb2" width="48%" />
 </p>
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/86882607/181925350-7f31e072-861e-4552-bf4e-b42de4dc8082.png" width="48%" />
+  <img src="https://github.com/user-attachments/assets/77acb0a2-98ed-4c56-afc5-1907c1e4e9df" width="48%" />
   <img src="https://user-images.githubusercontent.com/86882607/181925437-d523ac86-a52c-4b68-a5a2-1f124f10daa4.png" width="48%" />
 </p>
 <p align="center">

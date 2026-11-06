@@ -55,6 +55,14 @@ func (m *model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				m.bailout -= 0.1
 				m.resetCache()
 			}
+		case "x", "X":
+			m.showCoordinates = !m.showCoordinates
+		case "?", "h", "H":
+			m.showHelp = !m.showHelp
+		case "esc":
+			if m.showHelp {
+				m.showHelp = false
+			}
 		}
 	case tea.WindowSizeMsg:
 		m.height = msg.Height

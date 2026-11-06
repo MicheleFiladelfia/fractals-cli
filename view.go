@@ -1,8 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"strings"
 	"sync"
+
+	"github.com/charmbracelet/lipgloss"
 )
 
 const (
@@ -30,25 +33,72 @@ func (m *model) computePoint(r, i float64, misses *[]cacheEntry) int {
 	return iterations
 }
 
+func (m *model) renderCoordinatesBar() string {
+	coordText := fmt.Sprintf(" %s │ Pos: %.6f, %.6fi │ Zoom: %.1fx │ Iter: %d │ Bailout: %.1f │ Palette: %s │ [?] Help ",
+		m.stateName(), m.centerX, m.centerY, m.zoom, m.maxIterations, m.bailout, m.paletteName())
+
+	barStyle := lipgloss.NewStyle().
+		Bold(true).
+		Foreground(lipgloss.Color("#FFFFFF")).
+		Background(lipgloss.Color("#202020")).
+		MaxWidth(m.width)
+
+	return barStyle.Render(coordText)
+}
+
+func (m *model) renderHelpOverlay() string {
+	titleStyle := lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#FFD700")).MarginBottom(1)
+	keyStyle := lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#00FFFF"))
+	descStyle := lipgloss.NewStyle().Foreground(lipgloss.Color("#E0E0E0"))
+
+	lines := []string{
+		titleStyle.Render("=== FRACTALS-CLI CONTROLS ==="),
+		fmt.Sprintf("%s  %s", keyStyle.Render("W, A, S, D "), descStyle.Render("Move camera")),
+		fmt.Sprintf("%s  %s", keyStyle.Render("I / O      "), descStyle.Render("Zoom in / out")),
+		fmt.Sprintf("%s  %s", keyStyle.Render("+ / -      "), descStyle.Render("Iterations (+/- 5)")),
+		fmt.Sprintf("%s  %s", keyStyle.Render("B / V      "), descStyle.Render("Bailout (+/- 0.1)")),
+		fmt.Sprintf("%s  %s", keyStyle.Render("C          "), descStyle.Render("Next color palette")),
+		fmt.Sprintf("%s  %s", keyStyle.Render("N          "), descStyle.Render("Next fractal set")),
+		fmt.Sprintf("%s  %s", keyStyle.Render("X          "), descStyle.Render("Toggle coordinates bar")),
+		fmt.Sprintf("%s  %s", keyStyle.Render("? / H      "), descStyle.Render("Toggle this help")),
+		fmt.Sprintf("%s  %s", keyStyle.Render("ctrl+c     "), descStyle.Render("Quit")),
+		"",
+		descStyle.Render("Press ? or Esc to close"),
+	}
+
+	boxStyle := lipgloss.NewStyle().
+		Border(lipgloss.RoundedBorder()).
+		BorderForeground(lipgloss.Color("#888888")).
+		Background(lipgloss.Color("#181818")).
+		Padding(1, 2)
+
+	return boxStyle.Render(strings.Join(lines, "\n"))
+}
+
 func (m *model) View() string {
 	if m.height <= 0 || m.width <= 0 {
 		return ""
 	}
 
-	pixels := make([]string, m.height)
+	renderHeight := m.height
+	if m.showCoordinates && renderHeight > 1 {
+		renderHeight--
+	}
+
+	pixels := make([]string, renderHeight)
 	var rowMisses [][]cacheEntry
 	if m.usecache {
-		rowMisses = make([][]cacheEntry, m.height)
+		rowMisses = make([][]cacheEntry, renderHeight)
 	}
 
 	var wg sync.WaitGroup
-	wg.Add(m.height)
+	wg.Add(renderHeight)
 
-	subHeight := m.height * 2
+	subHeight := renderHeight * 2
 
 	m.cacheMu.RLock()
 	// Generating fractal colored image with double vertical resolution (upper half-block '▀')
-	for rowIdx := 0; rowIdx < m.height; rowIdx++ {
+	for rowIdx := 0; rowIdx < renderHeight; rowIdx++ {
 		yTop := rowIdx * 2
 		yBot := yTop + 1
 		iTop := m.centerY + ((float64(yTop)-float64(subHeight)/2.0)/(m.zoom*float64(subHeight)))*(YMAX-YMIN)
@@ -95,6 +145,20 @@ func (m *model) View() string {
 		m.cacheMu.Unlock()
 	}
 
-	return strings.Join(pixels, "\n")
+	output := strings.Join(pixels, "\n")
+	if m.showCoordinates {
+		output += "\n" + m.renderCoordinatesBar()
+	}
+
+	if m.showHelp {
+		overlay := m.renderHelpOverlay()
+		output = lipgloss.Place(m.width, m.height, lipgloss.Center, lipgloss.Center, overlay,
+			lipgloss.WithWhitespaceChars(" "),
+			lipgloss.WithWhitespaceForeground(lipgloss.NoColor{}),
+		)
+	}
+
+	return output
 }
+
 

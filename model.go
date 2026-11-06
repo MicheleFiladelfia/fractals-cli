@@ -31,6 +31,8 @@ type model struct {
 	usecache        bool
 	cache           map[uint64]int
 	cacheMu         sync.RWMutex
+	showCoordinates bool
+	showHelp        bool
 }
 
 func initialModel() *model {
@@ -54,6 +56,40 @@ func initialModel() *model {
 func (m *model) Init() tea.Cmd {
 	m.resetCache()
 	return nil
+}
+
+func (m *model) stateName() string {
+	switch m.state {
+	case MandelbrotSet:
+		return "Mandelbrot"
+	case JuliaSet:
+		return "Julia"
+	case BurningShipSet:
+		return "Burning Ship"
+	default:
+		return "Unknown"
+	}
+}
+
+func (m *model) paletteName() string {
+	switch m.color {
+	case DEF:
+		return "Default"
+	case PURPLE:
+		return "Purple"
+	case YELLOW:
+		return "Yellow"
+	case GREY:
+		return "Grey"
+	case FIRE:
+		return "Fire"
+	case BLUE:
+		return "Blue"
+	case RAINBOW:
+		return "Rainbow"
+	default:
+		return "Custom"
+	}
 }
 
 func (m *model) nextState() {

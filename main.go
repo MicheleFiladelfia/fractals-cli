@@ -29,6 +29,8 @@ func printHelp() {
 	fmt.Println("  N\t\t\tChange fractal set.")
 	fmt.Println("  B\t\t\tIncrease bailout by 0.1.")
 	fmt.Println("  V\t\t\tDecrease bailout by 0.1.")
+	fmt.Println("  X\t\t\tToggle coordinates status bar.")
+	fmt.Println("  ?\t\t\tToggle in-app help overlay.")
 	fmt.Println("  ctrl+c\t\tQuit.")
 	fmt.Println()
 	fmt.Println("Report bugs to <https://github.com/MicheleFiladelfia>")
